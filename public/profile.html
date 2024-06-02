@@ -121,31 +121,30 @@ background: linear-gradient(90deg, rgba(207,1,119,1) 0%, rgba(242,52,168,1) 23%,
         }
 
         .badge-list ul {
-            list-style-type: none;
-            padding: 0;
-        }
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap; /* Ensure badges wrap to the next line if there's not enough space */
+}
 
-        .badge-list li {
-            display: flex;
-            align-items: center;
-            background-color: #2e2e2e;
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 4px;
-            font-size: 16px;
-        }
+.badge-list li {
+    display: inline-flex; /* Display badges in a row */
+    align-items: center;
+    background-color: #2e2e2e;
+    padding: 10px;
+    margin-right: 10px; /* Add space between badges */
+    margin-bottom: 10px;
+    border-radius: 20px; /* Increase border radius */
+    font-size: 16px;
+}
+
 
         .badge-list li i {
             margin-right: 10px;
             color: #bb86fc;
         }
 
-        .badge-list li .badge-circle {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            margin-right: 10px;
-        }
+        
 
         .badge-list li .aiml { background-color: rgba(207,1,119,1); }
         .badge-list li .appdev { background-color: #6699ff; }
@@ -158,7 +157,7 @@ background: linear-gradient(90deg, rgba(207,1,119,1) 0%, rgba(242,52,168,1) 23%,
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    margin-right: 10px;
+    margin-right: 0px;
     /* Glowing effect */
     animation: glow 1.5s infinite alternate;
 }
