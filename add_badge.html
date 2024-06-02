@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Badge</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-dy0tzZI7jVzRjLjMXBMrGq9hGG/7NlH6H+86+5RlsCWoszKg+d3UL45SyF0enGrgyE/0v+O0U5hphjF8fJiQxQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>body {
+        font-family: Arial, sans-serif;
+        background-color: #121212;
+        color: #ffffff;
+        margin: 0;
+        padding: 0;
+    }
+    h1 {
+            text-align: center;
+            font-size: 38px;
+            font-weight: 800 ;
+            margin-bottom: 30px; /* Decreased margin */
+            background: linear-gradient(to right, #6500c3, #a872e9, #ff0a82);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+             
+        }
+
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        background-color: #1e1e1e;
+        box-shadow: 0 0 15px rgba(187, 134, 252, 0.5);
+    }
+
+    nav .logo {
+        font-size: 32px;
+        font-weight: 900;
+        -webkit-background-clip: text;
+        background: rgb(207,1,119);
+        background: linear-gradient(90deg, rgba(207,1,119,1) 0%, rgba(242,52,168,1) 23%, rgba(189,3,255,1) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 0 0 10px rgba(187, 134, 252, 0.5);
+    }
+
+    nav ul {
+        list-style: none;
+        display: flex;
+        gap: 20px;
+    }
+
+    nav ul li {
+        display: inline;
+    }
+
+    nav a {
+        text-decoration: none;
+        color: #e0e0e0;
+        font-weight: 700;
+        transition: color 0.3s;
+    }
+
+    nav a:hover {
+        color: #bb86fc;
+        background: rgb(207,1,119);
+        background: linear-gradient(90deg, rgba(207,1,119,1) 0%, rgba(242,52,168,1) 23%, rgba(189,3,255,1) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    nav a:after {
+        content: '';
+        bottom: -25px;
+        height: 0px;
+        width: 10px;
+        left: 50%;
+        position: absolute;
+        background-color: #01fefe;
+        border-radius: 50%;
+        transition: all 300ms;
+    }
+
+    nav a:hover::after {
+        height: 10px;
+        left: 50%;
+    }
+
+    .container {
+        max-width: 600px;
+        margin: 75px auto;
+        padding: 20px;
+        background-color: #1e1e1e;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        border-radius: 8px;
+    }
+
+    h1 {
+        text-align: center;
+        color: #ffffff;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    label {
+        margin-bottom: 8px;
+        
+        font-weight: bold;
+        color: whitesmoke;
+    }
+
+    input[type="text"],
+    select {
+        margin-bottom: 20px;
+        padding: 10px;
+        border: 1px solid rgba(207,1,119,1);
+        border-radius: 4px;
+        font-size: 16px;
+        background-color: #121212;
+        color: #ffffff;
+    }
+
+ 
+
+    input[type="submit"] {
+    display: inline-block;
+    margin: 10px 5px;
+    padding: 15px 15px;
+    background: #121212; /* Set background color to black */
+    color: #e0e0e0; /* Changed button text color to white */
+    border: 2px solid; /* Removed border color */
+    border-radius: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 700;
+    /* Gradient border */
+    border-image: linear-gradient(to right, rgba(207,1,119,1) 0%, rgba(242,52,168,1) 23%, rgba(189,3,255,1) 100%);
+    border-image-slice: 1; /* Ensure the entire border is used for the gradient */
+    /* Glowing effect */
+    /* box-shadow: 0 0 20px rgba(187, 134, 252, 0.5); */
+}
+
+    
+</style>
+</head>
+<body>
+    <nav>
+        <div class="logo">Perusal</div>
+        <ul>
+            <li><a href="#landing">Home</a></li>
+            <li><a href="profile.html?username=user1">Profile</a></li>           
+             <li><a href="#link3">#link3</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h1>Add Badge</h1>
+        <form id="addBadgeForm">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="badge">Badge:</label>
+            <select id="badge" name="badge" required>
+                <option value="aiml">AI/ML</option>
+                <option value="appdev">App Development</option>
+                <option value="cybersec">Cybersecurity</option>
+                <option value="devops">DevOps</option>
+                <option value="webdev">Web Development</option>
+            </select>
+
+            <input type="submit" value="Add Badge">
+        </form>
+    </div>
+    <script>
+        document.getElementById("addBadgeForm").addEventListener("submit", async function (event) {
+            event.preventDefault();
+
+            const username = document.getElementById("username").value;
+            const badge = document.getElementById("badge").value;
+
+            const response = await fetch("/add", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ username, badge })
+            });
+
+            const result = await response.json();
+            alert(result.message);
+        });
+    </script>
+</body>
+</html>
